@@ -24,11 +24,17 @@ class BankAccountTest {
 
     @Test
     void isEmailValidTest(){
+        //valid if characters before '@' and between '@' and '.' are 1 or more in number.
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
+        //invalid if string is empty. This is boundary case
         assertFalse( BankAccount.isEmailValid(""));
+        //invalid if '-' is before '@'
         assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
+        //invalid if # of characters after last '.' is 1 or less. This is boundary case.
         assertFalse(BankAccount.isEmailValid("abc.def@mail.c"));
+        //invalid if '#' is before '@'
         assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));
+        //invalid if '..' is found. This could be for any 2 symbols and be boundary case depending on implimentation
         assertFalse(BankAccount.isEmailValid("abc..def@mail.com"));
 
     }
