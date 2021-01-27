@@ -43,6 +43,26 @@ public class BankAccount {
         if (email.indexOf('@') == -1){
             return false;
         }
+        //invalid if string is empty. This is boundary case
+        else if (email.isEmpty()){
+            return false;
+        }
+        //invalid if '-' is in address
+        else if (email.indexOf('-') != -1){
+            return false;
+        }
+        //invalid if # of characters after last '.' is 1 or less. This is boundary case.
+        else if (email.length() - email.indexOf('.') <= 2){
+            return false;
+        }
+        //invalid if '#' is before '@'
+        else if (email.indexOf('#') < email.indexOf('@')){
+            return false;
+        }
+        //invalid if '..' is found. This could be for any 2 symbols and be boundary case depending on implimentation
+        else if (email.contains("..")){
+            return false;
+        }
         else {
             return true;
         }

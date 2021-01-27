@@ -28,7 +28,7 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
         //invalid if string is empty. This is boundary case
         assertFalse( BankAccount.isEmailValid(""));
-        //invalid if '-' is before '@'
+        //invalid if '-' is in address
         assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
         //invalid if # of characters after last '.' is 1 or less. This is boundary case.
         assertFalse(BankAccount.isEmailValid("abc.def@mail.c"));
