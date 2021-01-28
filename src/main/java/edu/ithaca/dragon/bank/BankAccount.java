@@ -56,6 +56,7 @@ public class BankAccount {
             return false;
         }
         //invalid if '#' is before '@'
+        //Question- can this be modified? The way this is currently written any email that does not contain a '#' will be found invalid
         else if (email.indexOf('#') < email.indexOf('@')){
             return false;
         }
