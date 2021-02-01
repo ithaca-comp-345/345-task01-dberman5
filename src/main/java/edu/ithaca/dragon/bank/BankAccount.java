@@ -27,20 +27,24 @@ public class BankAccount {
     }
 
     /**
-     * @post reduces the balance by amount if amount is non-negative and smaller than balance
+     * @post reduces the balance by amount if amount is non-negative and smaller than balance. If amount is negative, throws IllegalArgumentException
      */
     public void withdraw (double amount) throws InsufficientFundsException{
-        if (amount <= balance){
+        if (amount <= balance && amount > 0){
             balance -= amount;
         }
-        else {
+        else if(amount > balance){
             throw new InsufficientFundsException("Not enough money");
+        }
+
+        else if(amount <0){
+            throw new IllegalArgumentException("Cannot withdraw negative amount");
         }
     }
 
 
     public static boolean isEmailValid(String email){
-        if (email.indexOf('@') == -1){
+        if (email.indexOf('@') == -1 || email.indexOf('.')== -1){
             return false;
         }
         //invalid if string is empty
@@ -56,12 +60,20 @@ public class BankAccount {
             return false;
         }
         //invalid if '#' is before '@'
-        //Question- can this be modified? The way this is currently written any email that does not contain a '#' will be found invalid
-        else if (email.indexOf('#') < email.indexOf('@')){
+        
+        else if (email.indexOf('#') != -1){
             return false;
         }
         //invalid if '..' is found. This could be for any 2 symbols
-        else if (email.contains("..")){
+        else if (email.contains("..") || email.contains("@.")){
+            return false;
+        }
+
+        else if(email.charAt(email.length() -2) == '.'){
+            return false;
+        }
+
+        else if(email.indexOf('.') != -1 && email.indexOf('@') > email.lastIndexOf('.')){
             return false;
         }
         else {
