@@ -1,5 +1,7 @@
 package edu.ithaca.dragon.bank;
 
+import java.math.BigDecimal;
+
 public class BankAccount {
 
     private String email;
@@ -81,7 +83,13 @@ public class BankAccount {
         }
     }
 
-    public static boolean isAmountValid (double Amount){
-        return false;
+    public static boolean isAmountValid (double amount){
+        if(BigDecimal.valueOf(amount).scale() > 2){
+            return false;
+        }
+        else if(amount< 0){
+            return false;
+        }
+        return true;
     }
 }
