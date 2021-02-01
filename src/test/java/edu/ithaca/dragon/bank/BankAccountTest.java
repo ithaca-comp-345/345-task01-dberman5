@@ -103,6 +103,7 @@ class BankAccountTest {
        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -100));
        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -100.999));
        assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.com", -100.99));
+       assertThrows(IllegalArgumentException.class, ()-> new BankAccount("a@b.", 100.99));
     }
 
     @Test
