@@ -105,14 +105,29 @@ public class BankAccount {
      * @post If amount is valid, adds the amount to the current balance of the bank account. 
      */
     public void deposit(double amount){
+        if(isAmountValid(amount)){
+            balance +=amount;
+        }
+        else{
+            throw new IllegalArgumentException("Amount is invalid");
+        }
 
     }
 
 
      /**
-     * @post If amount is valid, withdraws amount from one bank account and deposits it in another
-     */
-    public void transfer(double amount, BankAccount toTransfer){
+      * @throws InsufficientFundsException
+      * @post If amount is valid, withdraws amount from one bank account and deposits
+      *       it in another
+      */
+     public void transfer(double amount, BankAccount toTransfer) throws InsufficientFundsException {
+        if(isAmountValid(amount)){
+            withdraw(amount);
+            toTransfer.deposit(amount);
+        }
+        else{
+            throw new IllegalArgumentException("Amount is invalid");
+        }
 
     }
 }
