@@ -71,7 +71,7 @@ public class BankAccount {
         }
         //invalid if '#' is before '@'
         
-        else if (email.indexOf('#') != -1){
+        else if (email.indexOf('#') != -1 || email.indexOf('*') != -1 || email.indexOf('$') != -1 || email.indexOf('!') != -1 || email.indexOf('^') != -1){
             return false;
         }
         //invalid if '..' is found. This could be for any 2 symbols

@@ -63,13 +63,18 @@ class BankAccountTest {
         assertTrue(BankAccount.isEmailValid( "a@b.com"));
         //invalid if string is empty. This is boundary case
         assertFalse( BankAccount.isEmailValid(""));
-        //invalid if '-' is in address
+        //invalid if there is no letter or number between - and @. Equivalence case- any non-letter or number character must be followed by a letter or number
         assertFalse(BankAccount.isEmailValid("abc-@mail.com"));
         //invalid if # of characters after last '.' is 1 or less. This is boundary case.
         assertFalse(BankAccount.isEmailValid("abc.def@mail.c"));
         assertTrue(BankAccount.isEmailValid("abc.def@mail.co"));
-        //invalid if '#' is before '@'
+        //invalid symbols
         assertFalse(BankAccount.isEmailValid("abc#def@mail.com"));
+        assertFalse(BankAccount.isEmailValid("a^bc@mail.com"));
+        assertFalse(BankAccount.isEmailValid("abc!g@mail.com"));
+        assertFalse(BankAccount.isEmailValid("$$$abc@mail.com"));
+        assertFalse(BankAccount.isEmailValid("a*b*c@mail.com"));
+
         //invalid if '..' is found. This could be for any 2 symbols and be boundary case depending on implimentation
         assertFalse(BankAccount.isEmailValid("abc..def@mail.com"));
         assertTrue(BankAccount.isEmailValid("abc.def@mail.com"));
@@ -77,7 +82,7 @@ class BankAccountTest {
         assertFalse(BankAccount.isEmailValid("abc.def@.com"));
         assertTrue(BankAccount.isEmailValid("abc.def@m.com"));
 
-        assertFalse(BankAccount.isEmailValid("#*$!@mail.com"));
+        assertFalse(BankAccount.isEmailValid("#*$!^@mail.com"));
         assertTrue(BankAccount.isEmailValid("abcde@mail.com"));
 
         assertFalse(BankAccount.isEmailValid("abc.def@mail"));
