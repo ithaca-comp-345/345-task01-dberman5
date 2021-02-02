@@ -122,4 +122,40 @@ class BankAccountTest {
         assertFalse(BankAccount.isAmountValid(20.0000000006));
     }
 
+    @Test
+    void depositTest(){
+        BankAccount bankAccount= new BankAccount("a@b.com", 200);
+        bankAccount.deposit(100);
+        assertEquals(bankAccount.getBalance(), 300);
+        bankAccount.deposit(0);
+        assertEquals(bankAccount.getBalance(), 300);
+        bankAccount.deposit(100.01);
+        assertEquals(bankAccount.getBalance(), 400.01);
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(-100));
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount.deposit(100.001));
+        bankAccount.deposit(0.99);
+        assertEquals(bankAccount.getBalance(), 401.00);
+
+    }
+
+    @Test
+    void transferTest(){
+        BankAccount bankAccount1= new BankAccount("a@b.com", 200);
+        BankAccount bankAccount2= new BankAccount("b@c.com", 200);
+        bankAccount1.transfer(100, bankAccount2);
+        assertEquals(bankAccount1.getBalance(), 100);
+        assertEquals(bankAccount2.getBalance(), 300);
+        assertThrows(InsufficientFundsException.class, ()-> bankAccount1.transfer(200, bankAccount2));
+        assertThrows(IllegalArgumentException.class, ()-> bankAccount1.transfer(-100, bankAccount2));
+        bankAccount2.transfer(100.1, bankAccount1);
+        assertEquals(bankAccount1.getBalance(), 200.1);
+        assertEquals(bankAccount2.getBalance(), 199.9);
+        bankAccount2.transfer(.05, bankAccount1);
+        assertEquals(bankAccount1.getBalance(), 200.15);
+        assertEquals(bankAccount2.getBalance(), 199.85);
+        assertThrows(IllegalAccessException.class, ()-> bankAccount1.transfer(0.001, bankAccount2));
+
+
+    }
+
 }

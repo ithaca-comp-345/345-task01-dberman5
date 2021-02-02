@@ -100,4 +100,19 @@ public class BankAccount {
         }
         return true;
     }
+
+     /**
+     * @post If amount is valid, adds the amount to the current balance of the bank account. 
+     */
+    public void deposit(double amount){
+
+    }
+
+
+     /**
+     * @post If amount is valid, withdraws amount from one bank account and deposits it in another
+     */
+    public void transfer(double amount, BankAccount toTransfer){
+
+    }
 }
